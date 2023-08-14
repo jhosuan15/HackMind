@@ -1,0 +1,74 @@
+<!--?php 
+$servidor="localhost";
+$usuario="root";
+$contraseña="";
+
+$name = "";
+$lastName = "";
+$number = "";
+$email = "";
+$password = "";
+
+try{
+    if($_POST){
+    $name = $_POST['nombre'];
+    $lastName = $_POST['apellido'];
+    $number = $_POST['numero'];
+    $email = $_POST['correo'];
+    $password = $_POST['contrasena'];
+    $conexion=new PDO("mysql:host=$servidor;dbname=atreus",$usuario,$contraseña);
+    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "INSERT INTO `usuarios` (`Name`, `LastName`, `Number`, `Email`, `Password`) VALUES ('$name','$lastName','$number','$email','$password');";
+    $conexion->exec($sql);  
+}
+}catch(PDOException $error){
+
+}
+?--->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width', initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="SignUp.css"/>
+    <link rel="icon" href="icon.png">
+</head>
+<body>
+    <div class="container">
+        <div class="container1">
+        <h2>Sign Up</h2>
+            <form   action="Main.html">
+                <div class="inputBox">
+                    <input type="text" name="nombre" required="required" />
+                    <span>Name</span>
+                    <i></i>
+                </div>
+                <div class="inputBox">
+                    <input type="text" name="apellido" required="required" />
+                    <span>Last name</span>
+                    <i></i>
+                </div>
+                <div class="inputBox">
+                    <input type="number" name="numero" required="required" min="0" max="99999999" />
+                    <span>number</span>
+                    <i></i>
+                </div>
+                <div class="inputBox">
+                    <input type="email" name="correo" required="required" />
+                    <span>Email</span>
+                    <i></i>
+                </div>
+                <div class="inputBox">
+                    <input type="password" name="contrasena" required="required" />
+                    <span>Password</span>
+                    <i></i>
+                </div>
+                <br><br>
+                    <input style="color: white;" type="submit" value="Sign up">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
